@@ -4,5 +4,3 @@ from .models import *
 admin.site.register(Product)
 admin.site.register(Sex)
 admin.site.register(Category)
-admin.site.register(Order)
-
