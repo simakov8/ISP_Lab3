@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class Product(models.Model):
     product_name = models.CharField(max_length=50, verbose_name='Название')
-    foto = models.ImageField(upload_to='images/', verbose_name='Фото', null=True, blank=True)
+    foto = models.ImageField(upload_to='images', verbose_name='Фото', null=True, blank=True)
     price = models.IntegerField(verbose_name='Цена')
     sex = models.ForeignKey('Sex', on_delete=models.SET_NULL, null=True, blank=True)
     category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True, blank=True)
