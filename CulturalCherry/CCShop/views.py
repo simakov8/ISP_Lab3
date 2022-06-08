@@ -107,6 +107,7 @@ class ProductView(HeaderView, FormView):
 class CartView(HeaderView, FormView):
     form_class = MakeOrderForm
     template_name = 'CCShop/cart.html'
+    success_url = '/'
 
     def get_context_data(self, **kwargs):
         context = super(CartView, self).get_context_data(**kwargs)
@@ -121,6 +122,18 @@ class CartView(HeaderView, FormView):
             'preorders': orders,
         })
         return context
+
+    def form_valid(self, form):
+        preorders = Cart.objects.filter(user=self.request.user.pk)
+        for preorder in preorders:
+            order = Order()
+            user = User.objects.get(pk=self.request.user.pk)
+            order.user = user
+            order.count = preorder.count
+            order.product = preorder.product
+            order.save()
+        preorders.delete()
+        return super().form_valid(form)
 
 
 class SignOutView(HeaderView, LogoutView):

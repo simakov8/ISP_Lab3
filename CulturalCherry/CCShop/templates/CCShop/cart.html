@@ -4,14 +4,15 @@
 {% if request.user.is_authenticated %}
 <div class="row">
     <div class="col-md-6">
+        <h4>Товары:</h4>
         {% for i, product, order in preorders %}
         <div class="card mb-3">
             <div class="row g-0">
                 <div class="col-md-4">
                     <img src="{{ product.foto.url }}" width="100px" class="img-fluid rounded-start" alt="...">
                 </div>
-                <div class="col-md-8">
-                    <div class="card-body">
+                <div class="col-md-8" style="border-left: solid;">
+                    <div class="card-body border-left border-dark">
                         <p class="card-text">{{ product.product_name }}</p>
                         <p class="card-text">Количество: {{ order.count }}</p>
                         <p class="card-text">Итоговая цена: {% widthratio order.count 1 product.price %}</p>
@@ -20,6 +21,15 @@
             </div>
         </div>
         {% endfor %}
+    </div>
+    <div class="col-md-6">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary btn-block">
+                Сделать заказ
+            </button>
+        </form>
     </div>
 </div>
 {% else %}
