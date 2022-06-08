@@ -14,8 +14,8 @@
                         <div class="col-5" align="start">
                             <h6>Цена: {{ product.price }}</h6>
                         </div>
-                        <div class="col-5" align="center">
-                            <a href="#" class="btn btn-primary">В корзину</a>
+                        <div class="col-6" align="center">
+                            <a href="{% url 'product' product.pk %}" class="btn btn-primary">Перейти к товару</a>
                         </div>
                     </div>
                 </div>

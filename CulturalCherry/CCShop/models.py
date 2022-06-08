@@ -47,3 +47,9 @@ class Order(models.Model):
     class Meta:
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
+
+
+class Cart(models.Model):
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    product = models.ForeignKey(Product, on_delete=models.PROTECT)
+    count = models.IntegerField()
